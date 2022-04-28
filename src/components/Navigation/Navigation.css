@@ -1,0 +1,24 @@
+.link {
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: 0.3s ease;
+}
+.link:hover {
+  color: red;
+}
+.active-link {
+  color: red;
+  text-decoration: none;
+
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.active-link:hover {
+  color: red;
+}
