@@ -1,12 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Button } from "react-bootstrap";
+import Navigation from "./components/Navigation/Navigation";
+import { Route, Routes } from "react-router-dom";
+import Home from "./components/Home/Home";
 
 function App() {
   return (
     <div className="App">
-    <Button>Click</Button>
+      <Navigation></Navigation>
+      <Routes>
+        <Route path="/" element={<Home></Home>}></Route>
+        <Route path="/home" element={<Home></Home>}></Route>
+      </Routes>
     </div>
   );
 }
