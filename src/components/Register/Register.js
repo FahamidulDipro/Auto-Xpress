@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+
 const Register = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  const [passwordMatchError, setPasswordMatchError] = useState("");
+  const onSubmit = (data) => {
+    const name = data.name;
+    const email = data.email;
+    const password = data.password;
+    const cpassword = data.cpassword;
+    if (password === cpassword) {
+      createUserWithEmailAndPassword(email, password);
+    } else {
+      setPasswordMatchError(
+        <p className="text-danger ">Passwords dn't match, try again</p>
+      );
+    }
+  };
   return (
     <div className="d-flex   justify-content-center w-100 container  mt-5 p-3">
       <form
@@ -54,15 +72,12 @@ const Register = () => {
         />
         <div className="d-flex justify-content-between">
           <div className="text-start mt-3">
-            <Link
-              className="text-danger  text-decoration-none"
-              to="/passwordReset"
-            >
-              Forget your password?
+            <Link className="text-dark text-decoration-none" to="#">
+              Recommend Strong Password?
             </Link>
           </div>
           <div className="text-end mt-3">
-            <p className="text-decoration-none" to="/passwordReset">
+            <p className="text-decoration-none">
               Already have an account?{" "}
               <Link to="/login" className="text-danger">
                 Please Login
