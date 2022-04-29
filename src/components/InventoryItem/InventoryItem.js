@@ -32,7 +32,6 @@ const InventoryItem = ({ inventory }) => {
           >
             Update
           </Button>
-          <Button variant="success">Delivered</Button>
         </Card.Body>
       </Card>
     </Col>

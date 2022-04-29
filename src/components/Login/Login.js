@@ -1,78 +1,84 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const navigate = useNavigate();
+  const onSubmit = (data) => {
+    const email = data.email;
+    const password = data.password;
+    signInWithEmailAndPassword(email, password);
+  };
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+  if (user) {
+    navigate("/");
+  }
+  let displayError;
+  if (error) {
+    displayError = <p className="text-danger text-start">{error?.message}</p>;
+  }
   return (
     <div>
-      <div className="d-flex   justify-content-center w-100 container  mt-5 p-3">
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="w-50 border  border-3 p-3"
-        >
-          <h1>Login</h1>
-          <input
-            {...register("name", { required: true })}
-            placeholder="Name"
-            className="form-control  p-2"
-            style={{ fontSize: "20px", background: "lightgrey" }}
-          />
-          <br />
-          <input
-            {...register("email")}
-            type="email"
-            required
-            placeholder="Email"
-            className="form-control  p-2"
-            style={{ fontSize: "20px", background: "lightgrey" }}
-          />
-          <br />
-          <input
-            {...register("password")}
-            type="password"
-            required
-            placeholder="Password"
-            className="form-control  p-2"
-            style={{ fontSize: "20px", background: "lightgrey" }}
-          />
-          <br />
-          <input
-            {...register("cpassword")}
-            type="password"
-            required
-            placeholder="Confirm Password"
-            className="form-control  p-2"
-            style={{ fontSize: "20px", background: "lightgrey" }}
-          />
-          <br />
+      <div
+        className="d-flex   justify-content-center w-100 container    p-3"
+        style={{ marginTop: "100px" }}
+      >
+        <section>
+          <h1 className="bg-dark text-light mb-0 p-3">Login</h1>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="w-100 border border-dark border-3 p-3"
+          >
+            <input
+              {...register("email")}
+              type="email"
+              required
+              placeholder="Email"
+              className="form-control  p-2"
+              style={{ fontSize: "20px", background: "lightgrey" }}
+            />
+            {displayError}
+            <br />
+            <input
+              {...register("password")}
+              type="password"
+              required
+              placeholder="Password"
+              className="form-control  p-2"
+              style={{ fontSize: "20px", background: "lightgrey" }}
+            />
+            <br />
 
-          <input
-            type="submit"
-            value="Register"
-            className="w-100 p-2 bg-danger text-light border-0"
-            style={{ fontSize: "20px" }}
-          />
-          <div className="d-flex justify-content-between">
-            <div className="text-start mt-3">
-              <Link
-                className="text-danger  text-decoration-none"
-                to="/passwordReset"
-              >
-                Forget your password?
-              </Link>
-            </div>
-            <div className="text-end mt-3">
-              <p className="text-decoration-none" to="/passwordReset">
-                Don't have an account?{" "}
-                <Link to="/register" className="text-danger">
-                  Please Register
+            <input
+              type="submit"
+              value="Login"
+              className="w-100 p-2 bg-danger text-light border-0"
+              style={{ fontSize: "20px" }}
+            />
+            <div className="d-flex justify-content-between">
+              <div className="text-start mt-3">
+                <Link
+                  className="text-danger  text-decoration-none"
+                  to="/passwordReset"
+                >
+                  Forget your password?
                 </Link>
-              </p>
+              </div>
+              <div className="text-end mt-3">
+                <p className="text-decoration-none" to="/passwordReset">
+                  Don't have an account?{" "}
+                  <Link to="/register" className="text-danger">
+                    Please Register
+                  </Link>
+                </p>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </section>
       </div>
     </div>
   );

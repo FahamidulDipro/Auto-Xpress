@@ -1,10 +1,8 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button } from "react-bootstrap";
 import Navigation from "./components/Navigation/Navigation";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
-import Inventory from "./components/Inventory/Inventory";
 import About from "./components/About/About";
 import Blogs from "./components/Blogs/Blogs";
 import Register from "./components/Register/Register";

@@ -1,31 +1,82 @@
-import React from 'react';
-import { Container, Nav, Navbar } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
-import './Navigation.css';
+import React from "react";
+import { Button, Container, Nav, Navbar } from "react-bootstrap";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { NavLink } from "react-router-dom";
+import auth from "../../firebase.init";
+import "./Navigation.css";
+import { signOut } from "firebase/auth";
+
 const Navigation = () => {
-    return (
-        <Navbar bg="dark" variant='dark' expand="lg">
-  <Container>
-    <Navbar.Brand to="#home" className='fw-bold'> <span className='text-danger'>Auto</span> Xpress</Navbar.Brand>
-    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    <Navbar.Collapse id="basic-navbar-nav">
-      <Nav className="me-auto">
-        <NavLink to="/" className={({isActive})=>isActive?'active-link':'link'}>Home</NavLink>
-        {/* <NavLink to="/inventory"  className={({isActive})=>isActive?'active-link':'link'}>Inventory</NavLink> */}
-        <NavLink to="/blogs"  className={({isActive})=>isActive?'active-link':'link'}>Blogs</NavLink>
-        <NavLink to="/about"  className={({isActive})=>isActive?'active-link':'link'}>About</NavLink>
-        
-      </Nav>
-      <Nav>
-      <NavLink to="/login"  className={({isActive})=>isActive?'active-link':'link'}>Login</NavLink>
-      <NavLink   to="/register"  className={({isActive})=>isActive?'active-link':'link'}>
-        Register
-      </NavLink>
-    </Nav>
-    </Navbar.Collapse>
-  </Container>
-</Navbar>
-    );
+  const [user] = useAuthState(auth);
+  const logout = () => {
+    signOut(auth);
+  };
+  return (
+    <Navbar bg="dark" variant="dark" expand="lg" className="fixed-top">
+      <Container>
+        <Navbar.Brand to="#home" className="fw-bold">
+          {" "}
+          <span className="text-danger">Auto</span> Xpress
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? "active-link" : "link")}
+            >
+              Home
+            </NavLink>
+
+            <NavLink
+              to="/blogs"
+              className={({ isActive }) => (isActive ? "active-link" : "link")}
+            >
+              Blogs
+            </NavLink>
+            <NavLink
+              to="/about"
+              className={({ isActive }) => (isActive ? "active-link" : "link")}
+            >
+              About
+            </NavLink>
+          </Nav>
+          <Nav>
+            {user ? (
+              <>
+                {" "}
+                <span className="text-warning fw-bold mt-2 me-3 mb-2">
+                  {user?.photoURL ? <img src="" alt="" /> : null}&nbsp; &nbsp;
+                  {user?.email}
+                </span>
+                <Button onClick={logout}>Logout</Button>
+              </>
+            ) : (
+              <span>
+                {" "}
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) =>
+                    isActive ? "active-link" : "link"
+                  }
+                >
+                  <Button variant="outline-light">Login</Button>
+                </NavLink>
+                <NavLink
+                  to="/register"
+                  className={({ isActive }) =>
+                    isActive ? "active-link" : "link"
+                  }
+                >
+                  <Button variant="outline-light">Register</Button>
+                </NavLink>
+              </span>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
 };
 
 export default Navigation;
