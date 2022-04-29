@@ -23,7 +23,10 @@ const InventoryDetail = () => {
     console.log(data.quantity);
   };
   return (
-    <div className="d-flex justify-content-between container border mt-5 w-75 p-3 text-start flex-lg-row flex-md-row flex-sm-column flex-column">
+    <div
+      className="d-flex justify-content-between container border   w-75 p-3 text-start flex-lg-row flex-md-row flex-sm-column flex-column"
+      style={{ marginTop: "100px" }}
+    >
       <section className="">
         <img
           src={selectedInventory?.img}

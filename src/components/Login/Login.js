@@ -62,7 +62,7 @@ const Login = () => {
             <div className="d-flex justify-content-between">
               <div className="text-start mt-3">
                 <Link
-                  className="text-danger  text-decoration-none"
+                  className="text-danger  text-decoration-none me-3"
                   to="/passwordReset"
                 >
                   Forget your password?

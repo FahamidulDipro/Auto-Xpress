@@ -46,9 +46,21 @@ const Navigation = () => {
               <>
                 {" "}
                 <span className="text-warning fw-bold mt-2 me-3 mb-2">
-                  {user?.photoURL ? <img src="" alt="" /> : null}&nbsp; &nbsp;
-                  {user?.email}
+                  {user.photoURL ? (
+                    <img
+                      src={user.photoURL}
+                      alt="userImg"
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "50%",
+                      }}
+                    />
+                  ) : null}
+                  &nbsp; &nbsp;
+                  {user?.displayName}
                 </span>
+                {console.log(user)}
                 <Button onClick={logout}>Logout</Button>
               </>
             ) : (

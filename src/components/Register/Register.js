@@ -4,23 +4,32 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { ToastContainer, toast } from "react-toastify";
+import { useSendEmailVerification } from "react-firebase-hooks/auth";
+import { useUpdateProfile } from "react-firebase-hooks/auth";
+
 import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
   const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const navigate = useNavigate();
   const [passwordMatchError, setPasswordMatchError] = useState("");
-  const onSubmit = (data) => {
+
+  const onSubmit = async (data) => {
     const name = data.name;
+    const photo = data.photoURL;
     const email = data.email;
     const password = data.password;
     const cpassword = data.cpassword;
-    console.log(name);
+    console.log(data);
     if (password === cpassword) {
-      createUserWithEmailAndPassword(email, password);
+      await createUserWithEmailAndPassword(email, password);
+      await updateProfile({ displayName: name, photoURL: photo });
+      console.log("Updated Profile");
       navigate("/");
+      window.location.reload();
     } else {
       setPasswordMatchError(
         <p className="text-danger text-start mt-3">
@@ -51,6 +60,13 @@ const Register = () => {
           <input
             {...register("name", { required: true })}
             placeholder="Name"
+            className="form-control  p-2 mt-3"
+            style={{ fontSize: "20px", background: "lightgrey" }}
+          />
+          <br />
+          <input
+            {...register("photoURL", { required: true })}
+            placeholder="Photo URL"
             className="form-control  p-2 mt-3"
             style={{ fontSize: "20px", background: "lightgrey" }}
           />
@@ -93,7 +109,7 @@ const Register = () => {
           />
           {passwordMatchError}
           <div className="d-flex justify-content-between">
-            <div className="text-start mt-3">
+            <div className="text-start mt-3 me-5">
               <Link className="text-dark text-decoration-none" to="#">
                 Recommend Strong Password?
               </Link>
