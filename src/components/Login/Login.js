@@ -11,15 +11,13 @@ const Login = () => {
   const onSubmit = (data) => {
     const email = data.email;
     const password = data.password;
-    signInWithEmailAndPassword(email, password).then(() => {
-      navigate(from, { replace: true });
-    });
+    signInWithEmailAndPassword(email, password);
   };
   const from = location?.state?.from?.pathname || "/";
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
   if (user) {
-    navigate("/");
+    navigate(from, { replace: true });
   }
   let displayError;
   if (error) {

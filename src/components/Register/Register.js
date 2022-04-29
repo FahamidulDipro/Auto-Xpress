@@ -29,7 +29,6 @@ const Register = () => {
       await updateProfile({ displayName: name, photoURL: photo });
       console.log("Updated Profile");
       navigate("/");
-      window.location.reload();
     } else {
       setPasswordMatchError(
         <p className="text-danger text-start mt-3">
