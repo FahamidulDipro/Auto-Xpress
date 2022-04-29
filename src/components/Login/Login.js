@@ -38,7 +38,7 @@ const Login = () => {
               type="email"
               required
               placeholder="Email"
-              className="form-control  p-2"
+              className="form-control  p-2 mt-3"
               style={{ fontSize: "20px", background: "lightgrey" }}
             />
             {displayError}

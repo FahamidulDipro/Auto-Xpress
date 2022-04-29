@@ -42,7 +42,7 @@ const Register = () => {
       style={{ marginTop: "100px" }}
     >
       {user ? <ToastContainer /> : null}
-      <section className="w-50">
+      <section>
         <h1 className="bg-dark text-light mb-0 p-3">Register</h1>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -51,7 +51,7 @@ const Register = () => {
           <input
             {...register("name", { required: true })}
             placeholder="Name"
-            className="form-control  p-2 "
+            className="form-control  p-2 mt-3"
             style={{ fontSize: "20px", background: "lightgrey" }}
           />
           <br />
