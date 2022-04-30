@@ -36,10 +36,11 @@ const InventoryDetail = () => {
     }
   };
   //Form submit functionalities
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-    setCarQuantity(data.quantity);
+    if (data.quantity > 0) setCarQuantity(data.quantity);
     console.log(data.quantity);
+    reset();
   };
 
   return (
@@ -75,7 +76,7 @@ const InventoryDetail = () => {
         <div className=" p-3">
           <div className="border border-dark border-3 mb-5">
             <h3 className="bg-dark text-light p-3">Available Quantity</h3>
-            <h1 className="text-center py-4 text-success">{carQuantity}</h1>
+            <h1 className="text-center py-4 text-info">{carQuantity}</h1>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <h3>Want To Restock Items?</h3>
@@ -84,6 +85,7 @@ const InventoryDetail = () => {
               {...register("quantity")}
               className="w-100 form-control my-3 p-3"
               placeholder="Enter amount to restock"
+              reset
             />
             <input
               type="submit"
