@@ -61,7 +61,9 @@ const Navigation = () => {
                   {user?.displayName}
                 </span>
                 {console.log(user)}
-                <Button onClick={logout}>Logout</Button>
+                <Button onClick={logout} variant="outline-light">
+                  Logout
+                </Button>
               </>
             ) : (
               <span>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card } from "react-bootstrap";
+import { Badge, Button, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import useInventory from "../../hooks/useInventory";
 import { useForm } from "react-hook-form";
@@ -47,15 +47,22 @@ const InventoryDetail = () => {
       className="d-flex justify-content-between container border   w-75 p-3 text-start flex-lg-row flex-md-row flex-sm-column flex-column"
       style={{ marginTop: "100px" }}
     >
-      <section className="">
-        <img
-          src={selectedInventory?.img}
-          alt="inventoryImg"
-          className="img-fluid mb-5"
-        />
-      </section>
-      <section className="ms-5">
-        <h2>{selectedInventory?.name}</h2>
+      <section className="border p-2 w-75">
+        <h2 className="mb-3">{selectedInventory?.name}</h2>
+        <section className="position-relative ">
+          <img
+            src={selectedInventory?.img}
+            alt="inventoryImg"
+            className="w-100 mb-5"
+          />
+          <Badge
+            bg="info position-absolute top-0 end-0 p-3 rounded-0"
+            style={{ fontSize: "18px" }}
+          >
+            ${selectedInventory?.price}
+          </Badge>
+        </section>
+
         <p> {selectedInventory?.shortDescription}</p>
         <p>
           <b>Price: </b>${selectedInventory?.price}
@@ -63,21 +70,34 @@ const InventoryDetail = () => {
         <p>
           <b>Quantity:</b> {carQuantity}
         </p>
-        <div className="d-flex flex-lg-row flex-md-row flex-sm-column flex-column">
-          <div
-            className="me-3"
-            style={{ marginTop: "36px", marginBottom: "30px" }}
-          >
-            <Button variant="success" onClick={quantityDecreaser}>
+      </section>
+      <section className=" w-50">
+        <div className=" border p-3">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <h3>Want To Restock Items?</h3>
+            <input
+              type="number"
+              {...register("quantity")}
+              className="w-100 form-control my-3 p-3"
+              placeholder="Enter amount to restock"
+            />
+            <input
+              type="submit"
+              value="Restock Items"
+              className="w-100 p-3 btn btn-info  text-light fw-bold"
+              style={{ fontSize: "18px" }}
+            />
+          </form>
+          <div style={{ marginTop: "36px", marginBottom: "30px" }}>
+            <Button
+              variant="danger"
+              onClick={quantityDecreaser}
+              className="w-100 p-3 fw-bold"
+              style={{ fontSize: "18px" }}
+            >
               Delivered
             </Button>
           </div>
-
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <h3>Restock Items</h3>
-            <input type="number" {...register("quantity")} className="w-75" />
-            <input type="submit" value="+" className="ms-2" />
-          </form>
         </div>
       </section>
     </div>
