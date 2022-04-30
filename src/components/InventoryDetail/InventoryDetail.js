@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import useInventory from "../../hooks/useInventory";
@@ -10,10 +10,29 @@ const InventoryDetail = () => {
   const selectedInventory = inventories.find(
     (inventory) => inventory._id === inventoryId
   );
-  const [carQuantity, setCarQuantity] = useState(0);
+  const totalQuantity = selectedInventory?.quantity;
+  console.log(selectedInventory);
+  console.log(totalQuantity);
+  const [carQuantity, setCarQuantity] = useState(totalQuantity);
+  useEffect(() => {
+    setCarQuantity(totalQuantity);
+  }, [totalQuantity]);
   const quantityDecreaser = () => {
     if (carQuantity > 0) {
       setCarQuantity(carQuantity - 1);
+      const remainingQuantity = carQuantity - 1;
+      const data = { remainingQuantity };
+      fetch(`http://localhost:5000/inventories/${inventoryId}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          console.log(result);
+        });
     }
   };
   //Form submit functionalities
@@ -22,6 +41,7 @@ const InventoryDetail = () => {
     setCarQuantity(data.quantity);
     console.log(data.quantity);
   };
+
   return (
     <div
       className="d-flex justify-content-between container border   w-75 p-3 text-start flex-lg-row flex-md-row flex-sm-column flex-column"
@@ -54,7 +74,7 @@ const InventoryDetail = () => {
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)}>
-            <h3>Restock items</h3>
+            <h3>Restock Items</h3>
             <input type="number" {...register("quantity")} className="w-75" />
             <input type="submit" value="+" className="ms-2" />
           </form>
