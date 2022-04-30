@@ -47,7 +47,7 @@ const InventoryDetail = () => {
       className="d-flex justify-content-between container border   w-75 p-3 text-start flex-lg-row flex-md-row flex-sm-column flex-column"
       style={{ marginTop: "100px" }}
     >
-      <section className="border p-2 w-75">
+      <section className="border p-2">
         <h2 className="mb-3">{selectedInventory?.name}</h2>
         <section className="position-relative ">
           <img
@@ -71,8 +71,12 @@ const InventoryDetail = () => {
           <b>Quantity:</b> {carQuantity}
         </p>
       </section>
-      <section className=" w-50">
-        <div className=" border p-3">
+      <section className="">
+        <div className=" p-3">
+          <div className="border border-dark border-3 mb-5">
+            <h3 className="bg-dark text-light p-3">Available Quantity</h3>
+            <h1 className="text-center py-4 text-success">{carQuantity}</h1>
+          </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <h3>Want To Restock Items?</h3>
             <input
