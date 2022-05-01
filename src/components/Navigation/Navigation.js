@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import auth from "../../firebase.init";
 import "./Navigation.css";
 import { signOut } from "firebase/auth";
@@ -14,10 +14,10 @@ const Navigation = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="fixed-top">
       <Container>
-        <Navbar.Brand to="#home" className="fw-bold">
+       <Link to="/" className="text-decoration-none"><Navbar.Brand  className="fw-bold">
           {" "}
           <span className="text-danger">Auto</span> Xpress
-        </Navbar.Brand>
+        </Navbar.Brand></Link> 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

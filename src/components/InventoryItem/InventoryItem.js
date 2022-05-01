@@ -43,6 +43,7 @@ const InventoryItem = ({ inventory }) => {
           >
             Update
           </Button>
+          <Button variant="outline-info fw-bold ms-5">Select</Button>
         </Card.Body>
       </Card>
     </Col>

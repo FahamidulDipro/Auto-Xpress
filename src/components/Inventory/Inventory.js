@@ -1,13 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useInventory from "../../hooks/useInventory";
 import InventoryItem from "../InventoryItem/InventoryItem";
-
+import "./Inventory.css";
 const Inventory = () => {
-  const inventories = useInventory();
+  // const inventories = useInventory();
+  const [pageCount, setPageCount] = useState(0);
+  const [page, setPage] = useState(0);
+  const size = 6;
+  const [inventories, setInventories] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/inventories?page=${page}&size=${size}`)
+      .then((res) => res.json())
+      .then((data) => setInventories(data));
+  }, [page, size]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/itemCount")
+      .then((res) => res.json())
+      .then((data) => {
+        const count = data.count;
+        const pages = Math.ceil(count / 6);
+        setPageCount(pages);
+      });
+  }, []);
   return (
     <div className="container mt-5">
+      {console.log(pageCount)}
       <h1>Featured Inventory</h1>
       <Row className="container my-5">
         {inventories.map((inventory) => (
@@ -17,6 +37,18 @@ const Inventory = () => {
           ></InventoryItem>
         ))}
       </Row>
+      <div className="pagination">
+        {[...Array(pageCount).keys()].map((num) => (
+          <Button
+            keys={num}
+            variant="outline-info me-3"
+            className={page === num ? "selected" : ""}
+            onClick={() => setPage(num)}
+          >
+            {num + 1}
+          </Button>
+        ))}
+      </div>
       <Link to="/manageInventories">
         {" "}
         <Button

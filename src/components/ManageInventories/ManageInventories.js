@@ -1,18 +1,49 @@
 import React from "react";
 import { Button, Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import useInventory from "../../hooks/useInventory";
-import Inventory from "../Inventory/Inventory";
 
 const ManageInventories = () => {
   const inventories = useInventory();
+  const deleteHandler = (id) => {
+    console.log("Item deleted", id);
+  };
   let count = 0;
   return (
     <div style={{ marginTop: "100px" }} className="container">
-      <h1>Manage Inventory</h1>
+      <div className="d-flex justify-content-between">
+        <h1 className="mb-5">Manage Inventory</h1>
+        <div>
+          <Link to="/additems">
+            <Button
+              variant="info fw-bold text-light"
+              style={{ fontSize: "20px" }}
+            >
+              Add Items &nbsp;
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+                style={{ height: "30px", cursor: "pointer" }}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 4v16m8-8H4"
+                />
+              </svg>
+            </Button>
+          </Link>{" "}
+        </div>
+      </div>
+
       <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
+        <thead style={{ fontSize: "20px" }}>
+          <tr className="bg-dark text-light">
+            <th>Serial No.</th>
             <th>Item Name</th>
             <th>Item Details</th>
             <th>Delete Item</th>
@@ -20,7 +51,7 @@ const ManageInventories = () => {
         </thead>
         <tbody>
           {inventories.map((inventory) => (
-            <tr>
+            <tr key={inventory._id}>
               <td>{(count = count + 1)}</td>
               <td>{inventory.name}</td>
               <td>
@@ -46,15 +77,14 @@ const ManageInventories = () => {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  stroke-width="2"
+                  strokeWidth="2"
                   className="text-danger mt-5"
                   style={{ height: "30px", cursor: "pointer" }}
+                  onClick={() => {
+                    deleteHandler(inventory._id);
+                  }}
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                  />
+                  <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
               </td>
             </tr>

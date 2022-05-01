@@ -26,7 +26,7 @@ const Login = () => {
   return (
     <div>
       <div
-        className="d-flex   justify-content-center w-100 container    p-3"
+        className="d-flex   justify-content-center w-100 container p-3"
         style={{ marginTop: "100px" }}
       >
         <section>
