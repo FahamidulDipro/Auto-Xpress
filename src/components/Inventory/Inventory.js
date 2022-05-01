@@ -1,5 +1,6 @@
 import React from "react";
-import { Row } from "react-bootstrap";
+import { Button, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import useInventory from "../../hooks/useInventory";
 import InventoryItem from "../InventoryItem/InventoryItem";
 
@@ -16,6 +17,16 @@ const Inventory = () => {
           ></InventoryItem>
         ))}
       </Row>
+      <Link to="/manageInventories">
+        {" "}
+        <Button
+          variant="primary"
+          className=" p-3 fw-bold my-5"
+          style={{ fontSize: "18px" }}
+        >
+          Manage Inventory
+        </Button>
+      </Link>
     </div>
   );
 };

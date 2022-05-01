@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Badge, Button, Card } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useInventory from "../../hooks/useInventory";
 import { useForm } from "react-hook-form";
 
@@ -103,6 +103,16 @@ const InventoryDetail = () => {
             >
               Delivered
             </Button>
+            <Link to="/manageInventories">
+              {" "}
+              <Button
+                variant="primary"
+                className="w-100 p-3 fw-bold mt-5"
+                style={{ fontSize: "18px" }}
+              >
+                Manage Inventory
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
