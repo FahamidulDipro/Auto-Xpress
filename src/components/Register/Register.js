@@ -8,6 +8,7 @@ import { useSendEmailVerification } from "react-firebase-hooks/auth";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
 
 import "react-toastify/dist/ReactToastify.css";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
@@ -103,7 +104,7 @@ const Register = () => {
           <input
             type="submit"
             value="Register"
-            className="w-100 p-2 bg-danger text-light border-0"
+            className="w-100 p-2 bg-danger text-light border-0 rounded"
             style={{ fontSize: "20px" }}
           />
           {passwordMatchError}
@@ -122,6 +123,7 @@ const Register = () => {
               </p>
             </div>
           </div>
+          <SocialLogin></SocialLogin>
         </form>
       </section>
     </div>

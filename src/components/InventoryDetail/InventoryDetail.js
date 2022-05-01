@@ -45,10 +45,10 @@ const InventoryDetail = () => {
 
   return (
     <div
-      className="d-flex justify-content-between container border   w-75 p-3 text-start flex-lg-row flex-md-row flex-sm-column flex-column"
+      className="d-flex justify-content-between container   w-100   p-3 text-start flex-lg-row flex-md-row flex-sm-column flex-column"
       style={{ marginTop: "100px" }}
     >
-      <section className="border p-2">
+      <section className=" p-2">
         <h2 className="mb-3">{selectedInventory?.name}</h2>
         <section className="position-relative ">
           <img
@@ -72,7 +72,7 @@ const InventoryDetail = () => {
           <b>Quantity:</b> {carQuantity}
         </p>
       </section>
-      <section className="">
+      <section className="w-100">
         <div className=" p-3">
           <div className="border border-dark border-3 mb-5">
             <h3 className="bg-dark text-light p-3">Available Quantity</h3>

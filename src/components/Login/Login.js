@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -58,9 +59,10 @@ const Login = () => {
             <input
               type="submit"
               value="Login"
-              className="w-100 p-2 bg-danger text-light border-0"
+              className="w-100 p-2 bg-danger text-light border-0 rounded"
               style={{ fontSize: "20px" }}
             />
+            
             <div className="d-flex justify-content-between">
               <div className="text-start mt-3">
                 <Link
@@ -79,6 +81,7 @@ const Login = () => {
                 </p>
               </div>
             </div>
+            <SocialLogin></SocialLogin>
           </form>
         </section>
       </div>
