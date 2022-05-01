@@ -28,6 +28,35 @@ const Navigation = () => {
               Home
             </NavLink>
 
+            {user ? (
+              <>
+                {" "}
+                <NavLink
+                  to="/manageInventories"
+                  className={({ isActive }) =>
+                    isActive ? "active-link" : "link"
+                  }
+                >
+                  Manage Items
+                </NavLink>{" "}
+                <NavLink
+                  to="/addItems"
+                  className={({ isActive }) =>
+                    isActive ? "active-link" : "link"
+                  }
+                >
+                  Add Items
+                </NavLink>{" "}
+                <NavLink
+                  to="/myItems"
+                  className={({ isActive }) =>
+                    isActive ? "active-link" : "link"
+                  }
+                >
+                  My Items
+                </NavLink>{" "}
+              </>
+            ) : null}
             <NavLink
               to="/blogs"
               className={({ isActive }) => (isActive ? "active-link" : "link")}
@@ -44,7 +73,6 @@ const Navigation = () => {
           <Nav>
             {user ? (
               <>
-                {" "}
                 <span className="text-warning fw-bold mt-2 me-3 mb-2">
                   {user.photoURL ? (
                     <img
