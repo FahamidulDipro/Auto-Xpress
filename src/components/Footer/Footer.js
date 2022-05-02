@@ -1,7 +1,8 @@
 import React from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { FaFacebookF, FaGoogle, FaGithub } from "react-icons/fa";
-
+import { BsFillTelephoneFill } from "react-icons/bs";
+import { AiFillMail } from "react-icons/ai";
 const Footer = () => {
   return (
     <>
@@ -22,8 +23,13 @@ const Footer = () => {
               <div className="text-start container my-3">
                 <h3 className="mb-3">CONTACT</h3>
                 <hr />
-                <p>(007) 123 456 7890</p>
-                <p>support@example.com</p>
+                <p>
+                  <BsFillTelephoneFill className="me-3"></BsFillTelephoneFill>
+                  (007) 123 456 7890
+                </p>
+                <p>
+                  <AiFillMail className="me-3"></AiFillMail>support@example.com
+                </p>
               </div>
             </Col>
             <Col lg={3}>
