@@ -1,7 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 const AddItems = () => {
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
   const onSubmit = (data) => {
     fetch("http://localhost:5000/inventories", {
       method: "POST",
@@ -12,6 +14,7 @@ const AddItems = () => {
     })
       .then((res) => res.json())
       .then((result) => console.log(result));
+    navigate("/");
   };
   return (
     <div

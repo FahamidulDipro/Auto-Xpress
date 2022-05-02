@@ -1,16 +1,33 @@
 import React from "react";
 import { Badge, Button, Card, Col } from "react-bootstrap";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
+import auth from "../../firebase.init";
 
 const InventoryItem = ({ inventory }) => {
   const { _id, name, shortDescription, img, price, quantity, supplierName } =
     inventory;
+  const [user] = useAuthState(auth);
+  const email = user?.email;
+  //Adding user email to inventory data
+  inventory.email = email;
   const navigate = useNavigate();
   const handleUpdate = (id) => {
     navigate(`/inventory/${id}`);
   };
+  const selectItems = id=>{
+    fetch('http://localhost:5000/selectedItems',{
+      method:"POST",
+      headers:{
+        'content-type':'application/json',
+      },body:JSON.stringify(inventory),
+    }).then(res=>res.json()).then(result=>console.log(result));
+  }
   return (
     <Col lg={4} className="g-5">
+    {
+      console.log(inventory)
+    }
       <Card
         style={{ width: "18rem" }}
         className="border-0 shadow-lg position-relative"
@@ -43,7 +60,7 @@ const InventoryItem = ({ inventory }) => {
           >
             Update
           </Button>
-          <Button variant="outline-info fw-bold ms-5">Select</Button>
+          <Button variant="outline-info fw-bold ms-5" onClick={()=>selectItems(_id)}>Select</Button>
         </Card.Body>
       </Card>
     </Col>

@@ -71,6 +71,9 @@ const InventoryDetail = () => {
         <p>
           <b>Quantity:</b> {carQuantity}
         </p>
+        <p>
+          <b>Supplier Name: </b>{selectedInventory?.supplierName}
+        </p>
       </section>
       <section className="w-100">
         <div className=" p-3">
