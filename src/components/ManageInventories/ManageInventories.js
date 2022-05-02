@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import useInventory from "../../hooks/useInventory";
+
 
 const ManageInventories = () => {
-  const inventories = useInventory();
+  const [inventories, setInventories] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/inventories")
+      .then((res) => res.json())
+      .then((data) => setInventories(data));
+  }, []);
   const deleteHandler = (id) => {
-    console.log("Item deleted", id);
+    const confirmDelete = window.confirm("Are you sure you want to remove?");
+    if (confirmDelete) {
+      fetch(`http://localhost:5000/deleteFromInventory/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          const remainingItems = inventories.filter(
+            (item) => item._id !== id
+          );
+          setInventories(remainingItems);
+          console.log(result);
+        });
+    }
   };
   let count = 0;
   return (
@@ -63,7 +81,7 @@ const ManageInventories = () => {
                   </p>
                   <p>
                     <b>Price: </b>
-                    {inventory.price}
+                    ${inventory.price}
                   </p>
                   <p>
                     <b>Supplier Name: </b>
