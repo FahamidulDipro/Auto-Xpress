@@ -37,7 +37,7 @@ const Inventory = () => {
           ></InventoryItem>
         ))}
       </Row>
-      <div className="pagination">
+      <div className="pagination  d-flex justify-content-center">
         {[...Array(pageCount).keys()].map((num) => (
           <Button
             keys={num}
