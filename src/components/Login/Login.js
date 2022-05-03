@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import Loading from "../Loading/Loading";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -17,6 +18,9 @@ const Login = () => {
   const from = location?.state?.from?.pathname || "/";
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+    if(loading){
+      return <Loading></Loading>
+    }
   if (user) {
     navigate(from, { replace: true });
   }

@@ -9,6 +9,7 @@ import { useUpdateProfile } from "react-firebase-hooks/auth";
 
 import "react-toastify/dist/ReactToastify.css";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import Loading from "../Loading/Loading";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
@@ -38,6 +39,9 @@ const Register = () => {
       );
     }
   };
+  if(loading){
+    return <Loading></Loading>
+ }
   let displayError;
   if (error) {
     toast(" User Can't Be Created");
