@@ -14,6 +14,7 @@ const SocialLogin = () => {
     if(user){
         navigate('/');
     }
+    //Displaying Loading Spinner while logging in
     if(loading){
        return <Loading></Loading>
     }

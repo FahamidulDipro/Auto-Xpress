@@ -39,6 +39,7 @@ const Register = () => {
       );
     }
   };
+  //Displaying Loading screen while registering
   if(loading){
     return <Loading></Loading>
  }

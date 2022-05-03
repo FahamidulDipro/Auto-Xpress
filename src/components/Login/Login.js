@@ -18,6 +18,7 @@ const Login = () => {
   const from = location?.state?.from?.pathname || "/";
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+    //Loading Spinner while loggin in
     if(loading){
       return <Loading></Loading>
     }
