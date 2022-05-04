@@ -1,16 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Figure, Row } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
-
+import { signOut } from "firebase/auth";
 const MyItems = () => {
   const [user] = useAuthState(auth);
   const [selectedItems, setSelectedItems] = useState([]);
+  const email = user?.email;
+  const navigate = useNavigate();
   useEffect(() => {
-    fetch("http://localhost:5000/selectedItems")
+    fetch(`http://localhost:5000/selectedItems?email=${email}`, {
+      headers: {
+        authorization: `bearer ${localStorage.getItem("AccessToken")}`,
+      },
+    })
       .then((res) => res.json())
-      .then((data) => setSelectedItems(data));
-  }, []);
+      .then((data) => setSelectedItems(data))
+      .catch((e) => {
+        // if (e.response.status === 401 || e.response.status === 403) {
+        //   signOut(auth);
+        //   navigate("/login");
+        console.log(e);
+        // }
+      });
+  }, [user]);
   //Canceling items
   const cancelHandler = (id) => {
     const confirmDelete = window.confirm("Are you sure you want to remove?");
@@ -21,7 +35,7 @@ const MyItems = () => {
       })
         .then((res) => res.json())
         .then((result) => {
-          const remainingItems = selectedItems.filter(
+          const remainingItems = selectedItems?.filter(
             (item) => item._id !== id
           );
           setSelectedItems(remainingItems);
@@ -33,7 +47,7 @@ const MyItems = () => {
   return (
     <div style={{ marginTop: "100px" }}>
       <Row>
-        {selectedItems.map((selectedItem) => {
+        {selectedItems?.map((selectedItem) => {
           if (selectedItem.email === user?.email) {
             return (
               <Col

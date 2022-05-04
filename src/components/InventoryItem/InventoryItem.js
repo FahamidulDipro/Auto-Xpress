@@ -25,9 +25,7 @@ const InventoryItem = ({ inventory }) => {
   }
   return (
     <Col lg={4} className="g-5">
-    {
-      console.log(inventory)
-    }
+   
       <Card
         style={{ width: "18rem" }}
         className="border-0 shadow-lg position-relative"

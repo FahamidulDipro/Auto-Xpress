@@ -5,12 +5,14 @@ import { Link, NavLink } from "react-router-dom";
 import auth from "../../firebase.init";
 import "./Navigation.css";
 import { signOut } from "firebase/auth";
+import Loading from "../Loading/Loading";
 
 const Navigation = () => {
   const [user] = useAuthState(auth);
   const logout = () => {
     signOut(auth);
   };
+   
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="fixed-top">
       <Container>
@@ -88,7 +90,7 @@ const Navigation = () => {
                   &nbsp; &nbsp;
                   {user?.displayName}
                 </span>
-                {console.log(user)}
+             
                 <Button onClick={logout} variant="outline-light">
                   Logout
                 </Button>

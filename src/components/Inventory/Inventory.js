@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Button, Row } from "react-bootstrap";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
+import auth from "../../firebase.init";
 import useInventory from "../../hooks/useInventory";
 import InventoryItem from "../InventoryItem/InventoryItem";
+import Loading from "../Loading/Loading";
 import "./Inventory.css";
 const Inventory = () => {
-  // const inventories = useInventory();
+
+ 
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
   const size = 6;
@@ -27,7 +31,7 @@ const Inventory = () => {
   }, []);
   return (
     <div className="container mt-5">
-      {console.log(pageCount)}
+   
       <h1>Featured Inventory</h1>
       <Row className="container my-5">
         {inventories.map((inventory) => (

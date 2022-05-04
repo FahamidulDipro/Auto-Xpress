@@ -1,27 +1,57 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import Loading from "../Loading/Loading";
+import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
+import { Button, Toast } from "react-bootstrap";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const location = useLocation();
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+  const emailRef = useRef("");
+  //Password Reset Email Sending Handler
+  const resetPassword = async () => {
+    const email = emailRef.current.value;
+    if (email) {
+      await sendPasswordResetEmail(email);
+      toast("Password Reset Email Sent");
+    } else {
+      toast("Please enter your Email Address");
+    }
+  };
   const onSubmit = (data) => {
     const email = data.email;
     const password = data.password;
     signInWithEmailAndPassword(email, password);
+    fetch("http://localhost:5000/getToken", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        //Setting user jwt token to local storage
+        localStorage.setItem("AccessToken", result.token);
+      });
   };
   const from = location?.state?.from?.pathname || "/";
-  const [signInWithEmailAndPassword, user, loading, error] =
-    useSignInWithEmailAndPassword(auth);
-    //Loading Spinner while loggin in
-    if(loading){
-      return <Loading></Loading>
-    }
+
+  //Loading Spinner while loggin in
+  if (loading) {
+    return <Loading></Loading>;
+  }
   if (user) {
     navigate(from, { replace: true });
   }
@@ -31,6 +61,7 @@ const Login = () => {
   }
   return (
     <div>
+      <ToastContainer></ToastContainer>
       <div
         className="d-flex   justify-content-center w-100 container p-3"
         style={{ marginTop: "100px" }}
@@ -46,6 +77,7 @@ const Login = () => {
               type="email"
               required
               placeholder="Email"
+              ref={emailRef}
               className="form-control  p-2 mt-3"
               style={{ fontSize: "20px", background: "lightgrey" }}
             />
@@ -67,17 +99,17 @@ const Login = () => {
               className="w-100 p-2 bg-danger text-light border-0 rounded"
               style={{ fontSize: "20px" }}
             />
-            
+
             <div className="d-flex justify-content-between">
-              <div className="text-start mt-3">
-                <Link
-                  className="text-danger  text-decoration-none me-3"
-                  to="/passwordReset"
+              <div className="text-start ">
+                <Button
+                  variant="link text-decoration-none"
+                  onClick={resetPassword}
                 >
                   Forget your password?
-                </Link>
+                </Button>
               </div>
-              <div className="text-end mt-3">
+              <div className="text-end mt-2">
                 <p className="text-decoration-none" to="/passwordReset">
                   Don't have an account?{" "}
                   <Link to="/register" className="text-danger">
