@@ -1,4 +1,5 @@
 import React from "react";
+import Counter from "../Counter/Counter";
 import Footer from "../Footer/Footer";
 import Inventory from "../Inventory/Inventory";
 import Slider from "../Slider/Slider";
@@ -10,6 +11,7 @@ const Home = () => {
       <Slider></Slider>
       <Inventory></Inventory>
       <Testimonials></Testimonials>
+      <Counter></Counter>
       <Footer></Footer>
     </div>
   );

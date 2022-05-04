@@ -4,7 +4,11 @@ import { Card, Col, Row } from "react-bootstrap";
 const Testimonials = () => {
   return (
     <div className="container my-5 p-5">
-      <h1 className="my-5 ">Our Testimonials</h1>
+      <h1 className="mt-5 text-uppercase">Our Testimonials</h1>
+      <small className="mb-5 text-secondary">
+        What Our Happy Clients say about us
+      </small>
+
       <hr className="text-danger" style={{ height: "5px" }} />
 
       <Row>
