@@ -18,13 +18,13 @@ const MyItems = () => {
       .then((res) => res.json())
       .then((data) => setSelectedItems(data))
       .catch((e) => {
-        // if (e.response.status === 401 || e.response.status === 403) {
-        //   signOut(auth);
-        //   navigate("/login");
-        console.log(e);
-        // }
+        if (e.response.status === 401 || e.response.status === 403) {
+          signOut(auth);
+          navigate("/login");
+          console.log(e);
+        }
       });
-  }, [user]);
+  }, [user, email]);
   //Canceling items
   const cancelHandler = (id) => {
     const confirmDelete = window.confirm("Are you sure you want to remove?");

@@ -17,17 +17,9 @@ const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
   const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
-  const emailRef = useRef("");
-  //Password Reset Email Sending Handler
-  const resetPassword = async () => {
-    const email = emailRef.current.value;
-    if (email) {
-      await sendPasswordResetEmail(email);
-      toast("Password Reset Email Sent");
-    } else {
-      toast("Please enter your Email Address");
-    }
-  };
+
+
+  
   const onSubmit = (data) => {
     const email = data.email;
     const password = data.password;
@@ -55,6 +47,17 @@ const Login = () => {
   if (user) {
     navigate(from, { replace: true });
   }
+
+  const resetPass = async (data)=>{
+     const email = data.email;
+     if(email){
+       await sendPasswordResetEmail(email);
+       toast("Password Reset Email Sent");
+     }else{
+       toast("Please enter your Email Address")
+     }
+     
+  }
   let displayError;
   if (error) {
     displayError = <p className="text-danger text-start">{error?.message}</p>;
@@ -62,6 +65,7 @@ const Login = () => {
   return (
     <div>
       <ToastContainer></ToastContainer>
+      
       <div
         className="d-flex   justify-content-center w-100 container p-3"
         style={{ marginTop: "100px" }}
@@ -77,7 +81,6 @@ const Login = () => {
               type="email"
               required
               placeholder="Email"
-              ref={emailRef}
               className="form-control  p-2 mt-3"
               style={{ fontSize: "20px", background: "lightgrey" }}
             />
@@ -104,7 +107,7 @@ const Login = () => {
               <div className="text-start ">
                 <Button
                   variant="link text-decoration-none"
-                  onClick={resetPassword}
+                  onClick={handleSubmit(resetPass)}
                 >
                   Forget your password?
                 </Button>

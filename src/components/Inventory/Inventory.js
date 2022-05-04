@@ -9,7 +9,7 @@ import Loading from "../Loading/Loading";
 import "./Inventory.css";
 const Inventory = () => {
 
- 
+
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
   const size = 6;
