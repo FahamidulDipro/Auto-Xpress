@@ -29,6 +29,21 @@ const Register = () => {
     if (password === cpassword) {
       await createUserWithEmailAndPassword(email, password);
       await updateProfile({ displayName: name, photoURL: photo });
+      fetch("http://localhost:5000/getToken", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        
+        console.log(result);
+        //Setting user jwt token to local storage
+
+        localStorage.setItem("AccessToken", result.token);
+      });
       console.log("Updated Profile");
       navigate("/");
     } else {

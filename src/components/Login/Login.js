@@ -33,8 +33,10 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((result) => {
+        
         console.log(result);
         //Setting user jwt token to local storage
+
         localStorage.setItem("AccessToken", result.token);
       });
   };

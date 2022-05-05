@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import "./Navigation.css";
 import { signOut } from "firebase/auth";
@@ -9,13 +9,18 @@ import Loading from "../Loading/Loading";
 
 const Navigation = () => {
   const [user] = useAuthState(auth);
+  const navigate = useNavigate(auth);
   const logout = () => {
+    
     signOut(auth);
+    navigate('/login');
+
   };
    
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="fixed-top">
       <Container>
+       
        <Link to="/" className="text-decoration-none"><Navbar.Brand  className="fw-bold">
           {" "}
           <span className="text-danger">Auto</span> Xpress

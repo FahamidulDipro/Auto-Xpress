@@ -8,8 +8,6 @@ import InventoryItem from "../InventoryItem/InventoryItem";
 import Loading from "../Loading/Loading";
 import "./Inventory.css";
 const Inventory = () => {
-
-
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
   const size = 6;
@@ -33,14 +31,17 @@ const Inventory = () => {
     <div className="container mt-5">
    
       <h1>Featured Inventory</h1>
-      <Row className="container my-5">
+      {
+        inventories?<Row className="container my-5">
         {inventories.map((inventory) => (
           <InventoryItem
             key={inventory._id}
             inventory={inventory}
           ></InventoryItem>
         ))}
-      </Row>
+      </Row>:<Loading></Loading>
+      }
+      
       <div className="pagination  d-flex justify-content-center">
         {[...Array(pageCount).keys()].map((num) => (
           <Button
