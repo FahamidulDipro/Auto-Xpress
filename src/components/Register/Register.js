@@ -10,6 +10,7 @@ import { useUpdateProfile } from "react-firebase-hooks/auth";
 import "react-toastify/dist/ReactToastify.css";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import Loading from "../Loading/Loading";
+import { Button, OverlayTrigger, Popover } from "react-bootstrap";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
@@ -30,20 +31,19 @@ const Register = () => {
       await createUserWithEmailAndPassword(email, password);
       await updateProfile({ displayName: name, photoURL: photo });
       fetch("https://polar-inlet-04132.herokuapp.com/getToken", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ email }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        
-        console.log(result);
-        //Setting user jwt token to local storage
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          console.log(result);
+          //Setting user jwt token to local storage
 
-        localStorage.setItem("AccessToken", result.token);
-      });
+          localStorage.setItem("AccessToken", result.token);
+        });
       console.log("Updated Profile");
       navigate("/");
     } else {
@@ -54,10 +54,23 @@ const Register = () => {
       );
     }
   };
+  //Strong Password Generator
+  const [pass, setPass] = useState("");
+  const strongPassGen = () => {
+    const chars =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ12345678901234567890!@#$%^&*()";
+    const passwordLength = 8;
+    let password = "";
+    for (let i = 0; i <= passwordLength; i++) {
+      let random = Math.floor(Math.random() * chars.length);
+      password += chars.substring(random, random + 1);
+      setPass(password);
+    }
+  };
   //Displaying Loading screen while registering
-  if(loading){
-    return <Loading></Loading>
- }
+  if (loading) {
+    return <Loading></Loading>;
+  }
   let displayError;
   if (error) {
     toast(" User Can't Be Created");
@@ -130,9 +143,33 @@ const Register = () => {
           {passwordMatchError}
           <div className="d-flex justify-content-between">
             <div className="text-start mt-3 me-5">
-              <Link className="text-dark text-decoration-none" to="#">
+              {/* <Link className="text-dark text-decoration-none" to="#" onClick={strongPassGen} >
                 Recommend Strong Password?
-              </Link>
+              </Link> */}
+              <>
+                {["top"].map((placement) => (
+                  <OverlayTrigger
+                    trigger="click"
+                    key={placement}
+                    placement={placement}
+                    overlay={
+                      <Popover id={`popover-positioned-${placement}`}>
+                        <Popover.Header as="h3">
+                          Suggested Strong Password
+                        </Popover.Header>
+                        <Popover.Body>{pass}#4</Popover.Body>
+                      </Popover>
+                    }
+                  >
+                    <Button
+                      variant="outline-primary   fw-bold"
+                      onClick={strongPassGen}
+                    >
+                      Suggest Strong Password
+                    </Button>
+                  </OverlayTrigger>
+                ))}
+              </>
             </div>
             <div className="text-end mt-3">
               <p className="text-decoration-none">
