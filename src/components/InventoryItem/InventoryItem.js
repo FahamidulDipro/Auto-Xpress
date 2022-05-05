@@ -43,10 +43,13 @@ const InventoryItem = ({ inventory }) => {
         <Card.Body className="text-start">
           <div className="">
             <p className="me-2">
-              <b>Available Quantity:</b> {quantity}
+              <b>Available Quantity:</b> <span className="text-danger fw-bold">{quantity}</span>
+            </p>
+            <p className="me-2">
+              <b>Price:</b> <span className="text-success fw-bold"><span   className="text-dark">$</span>{price}</span>
             </p>
             <p>
-              <b>Supplier Name:</b> {supplierName}
+              <b>Supplier Name:</b> <span className="text-info fw-bold">{supplierName}</span>
             </p>
           </div>
           <Card.Text>{shortDescription}</Card.Text>

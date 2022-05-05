@@ -56,7 +56,7 @@ const MyItems = () => {
                 className="d-flex justify-content-center"
               >
                 <Figure className="d-flex justify-content-between shadow-lg p-3 w-75 position-relative">
-                  <div className="d-flex  ">
+                  <div className="d-flex  flex-lg-row flex-md-row flex-sm-column flex-column">
                     <Figure.Image
                       width={300}
                       height={280}

@@ -2,3 +2,13 @@
   background-color: blue;
   color: white;
 }
+body {
+  background-image: linear-gradient(
+      rgba(239, 232, 232, 0.958),
+      rgba(250, 250, 250, 0.951)
+    ),
+    url("https://thumbs.dreamstime.com/b/cool-white-modern-race-super-car-tail-view-isolated-background-127706404.jpg");
+  background-size: 100% 100%;
+
+  background-attachment: fixed;
+}

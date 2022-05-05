@@ -13,8 +13,6 @@ const SocialLogin = () => {
   const [user] = useAuthState(auth);
   if (user) {
     const email = user?.email;
-    console.log(user?.email);
-
     fetch("http://localhost:5000/getToken", {
       method: "POST",
       headers: {

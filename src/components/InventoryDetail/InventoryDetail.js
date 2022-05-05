@@ -66,13 +66,13 @@ const InventoryDetail = () => {
 
         <p> {selectedInventory?.shortDescription}</p>
         <p>
-          <b>Price: </b>${selectedInventory?.price}
+          <b>Price: </b><span className="text-success fw-bold"><span className="text-dark">$</span>{selectedInventory?.price}</span>
         </p>
         <p>
-          <b>Quantity:</b> {carQuantity}
+          <b>Quantity:</b> <span   className='fw-bold text-danger'>{carQuantity}</span>
         </p>
         <p>
-          <b>Supplier Name: </b>{selectedInventory?.supplierName}
+          <b>Supplier Name: </b><span className="text-primary fw-bold">{selectedInventory?.supplierName}</span>
         </p>
       </section>
       <section className="w-100">
