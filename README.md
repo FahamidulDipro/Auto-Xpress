@@ -1,8 +1,10 @@
-# **AUTO-XPRESS**
+# **AUTO XPRESS**
 
 ## _An automobile inventory management webapp_
 
 ---
+
+### AUTO XPRESS is an automobile inventory management webapp which will help it's users to select any quantity of cars. It has some tremendous features including the user verification and security. User/Buyer can easily see his/her ordered items and choose any of these items, or remove any items.
 
 - This full-stack application is built using `React`, `Node`,`Mongodb`,`Express`,`Firebase`,`React Router`,`React Firebase Hook`.
 
