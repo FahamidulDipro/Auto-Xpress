@@ -10,11 +10,14 @@ const MyItems = () => {
   const email = user?.email;
   const navigate = useNavigate();
   useEffect(() => {
-    fetch(`http://localhost:5000/selectedItems?email=${email}`, {
-      headers: {
-        authorization: `bearer ${localStorage.getItem("AccessToken")}`,
-      },
-    })
+    fetch(
+      `https://polar-inlet-04132.herokuapp.com/selectedItems?email=${email}`,
+      {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("AccessToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => setSelectedItems(data))
       .catch((e) => {
@@ -30,7 +33,7 @@ const MyItems = () => {
     const confirmDelete = window.confirm("Are you sure you want to remove?");
 
     if (confirmDelete) {
-      fetch(`http://localhost:5000/deleteItem/${id}`, {
+      fetch(`https://polar-inlet-04132.herokuapp.com/deleteItem/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

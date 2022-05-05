@@ -10,11 +10,11 @@ const Blogs = () => {
       <p className="mt-3 text-start">
         <b>Answer: </b>Here are the differences between Javascript and Node.js:{" "}
       </p>
-      <Table bordered>
+      <Table bordered className="border-dark">
         <thead>
           <tr>
-            <th className="text-center">Javascript</th>
-            <th className="text-center">Node.js</th>
+            <th className="text-center bg-warning">Javascript</th>
+            <th className="text-center bg-success">Node.js</th>
           </tr>
         </thead>
         <tbody>

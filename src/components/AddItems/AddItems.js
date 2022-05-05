@@ -5,7 +5,7 @@ const AddItems = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const onSubmit = (data) => {
-    fetch("http://localhost:5000/inventories", {
+    fetch("https://polar-inlet-04132.herokuapp.com/inventories", {
       method: "POST",
       headers: {
         "content-type": "application/json",

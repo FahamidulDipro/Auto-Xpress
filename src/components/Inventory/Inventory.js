@@ -13,13 +13,13 @@ const Inventory = () => {
   const size = 6;
   const [inventories, setInventories] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/inventories?page=${page}&size=${size}`)
+    fetch(`https://polar-inlet-04132.herokuapp.com/inventories?page=${page}&size=${size}`)
       .then((res) => res.json())
       .then((data) => setInventories(data));
   }, [page, size]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/itemCount")
+    fetch("https://polar-inlet-04132.herokuapp.com/itemCount")
       .then((res) => res.json())
       .then((data) => {
         const count = data.count;

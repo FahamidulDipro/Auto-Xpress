@@ -29,7 +29,7 @@ const Register = () => {
     if (password === cpassword) {
       await createUserWithEmailAndPassword(email, password);
       await updateProfile({ displayName: name, photoURL: photo });
-      fetch("http://localhost:5000/getToken", {
+      fetch("https://polar-inlet-04132.herokuapp.com/getToken", {
       method: "POST",
       headers: {
         "content-type": "application/json",

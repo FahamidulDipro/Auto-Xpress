@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 const ManageInventories = () => {
   const [inventories, setInventories] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/inventories")
+    fetch("https://polar-inlet-04132.herokuapp.com/inventories")
       .then((res) => res.json())
       .then((data) => setInventories(data));
   }, []);
   const deleteHandler = (id) => {
     const confirmDelete = window.confirm("Are you sure you want to remove?");
     if (confirmDelete) {
-      fetch(`http://localhost:5000/deleteFromInventory/${id}`, {
+      fetch(`https://polar-inlet-04132.herokuapp.com/deleteFromInventory/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

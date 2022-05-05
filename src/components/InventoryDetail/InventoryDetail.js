@@ -22,7 +22,7 @@ const InventoryDetail = () => {
       setCarQuantity(carQuantity - 1);
       const remainingQuantity = carQuantity - 1;
       const data = { remainingQuantity };
-      fetch(`http://localhost:5000/inventories/${inventoryId}`, {
+      fetch(`https://polar-inlet-04132.herokuapp.com/inventories/${inventoryId}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",

@@ -13,7 +13,7 @@ const SocialLogin = () => {
   const [user] = useAuthState(auth);
   if (user) {
     const email = user?.email;
-    fetch("http://localhost:5000/getToken", {
+    fetch("https://polar-inlet-04132.herokuapp.com/getToken", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -24,7 +24,7 @@ const Login = () => {
     const email = data.email;
     const password = data.password;
     signInWithEmailAndPassword(email, password);
-    fetch("http://localhost:5000/getToken", {
+    fetch("https://polar-inlet-04132.herokuapp.com/getToken", {
       method: "POST",
       headers: {
         "content-type": "application/json",

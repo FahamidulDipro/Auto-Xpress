@@ -16,7 +16,7 @@ const InventoryItem = ({ inventory }) => {
     navigate(`/inventory/${id}`);
   };
   const selectItems = id=>{
-    fetch('http://localhost:5000/selectedItems',{
+    fetch('https://polar-inlet-04132.herokuapp.com/selectedItems',{
       method:"POST",
       headers:{
         'content-type':'application/json',
